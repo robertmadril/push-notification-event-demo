@@ -29,14 +29,34 @@ import './theme/variables.css';
 setupIonicReact();
 
 PushNotifications.addListener('pushNotificationActionPerformed', async (event) => {
+  console.log('action performed');
+  alert('Push action performed: ' + JSON.stringify(event));
     browserHistory.push('/profile');
 });
 
-PushNotifications.addListener('registration', async (token) => {
-  await Preferences.set({ key: 'pushNotificationToken', value: token.value });
+PushNotifications.addListener('registrationError', (error) => {
+    console.log('registration error: ' + JSON.stringify(error));
 });
 
-PushNotifications.requestPermissions().then(() => { PushNotifications.register() });
+PushNotifications.addListener('registration', async (token) => {
+  try {
+    console.log('token value: ' + token.value);
+    await Preferences.set({ key: 'pushNotificationToken', value: token.value }).then(() => { });
+  }
+  catch (e) {
+    console.log('exception', e);
+  }
+});
+
+PushNotifications.requestPermissions().then(() => {
+  try {
+    console.log('register');
+     PushNotifications.register();
+    }
+    catch (e) {
+      console.log('exception', e);
+    }
+});
 
 const App: React.FC = () => (
   <IonApp>

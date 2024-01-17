@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "12977569869",
+    "project_id": "push-notification-event-demo",
+    "storage_bucket": "push-notification-event-demo.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:12977569869:android:32ee58b7a76e1a28239c04",
+        "android_client_info": {
+          "package_name": "io.ionic.starter"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA5BG-9MrYg6nfsLbg2LwNqIOdsLwno5EQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
