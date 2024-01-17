@@ -1,28 +1,28 @@
 import { IonButton, IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/react';
 import { browserHistory } from '../utils/history';
 
-const Home: React.FC = () => {
-  const routePush = () => {
-    browserHistory.push('/profile')
-  }
-
+const Profile: React.FC = () => {
+    const routeHome = () => {
+        browserHistory.push('/home');
+    }
+    
   return (
     <IonPage>
       <IonHeader>
         <IonToolbar>
-          <IonTitle>Home</IonTitle>
+          <IonTitle>Profile</IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
         <IonHeader collapse="condense">
           <IonToolbar>
-            <IonTitle size="large">Home Page</IonTitle>
+            <IonTitle size="large">Profile Page</IonTitle>
           </IonToolbar>
         </IonHeader>
-        <IonButton onClick={routePush}>Go to Profile</IonButton>
+        <IonButton onClick={routeHome}>Go Home</IonButton>
       </IonContent>
     </IonPage>
   );
 };
 
-export default Home;
+export default Profile;

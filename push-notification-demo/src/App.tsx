@@ -2,6 +2,10 @@ import { Redirect, Route } from 'react-router-dom';
 import { IonApp, IonRouterOutlet, setupIonicReact } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
 import Home from './pages/Home';
+import Profile from './pages/Profile';
+import { PushNotifications } from '@capacitor/push-notifications';
+import { Preferences } from '@capacitor/preferences';
+import { browserHistory } from './utils/history';
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -24,12 +28,25 @@ import './theme/variables.css';
 
 setupIonicReact();
 
+PushNotifications.addListener('pushNotificationActionPerformed', async (event) => {
+    browserHistory.push('/profile');
+});
+
+PushNotifications.addListener('registration', async (token) => {
+  await Preferences.set({ key: 'pushNotificationToken', value: token.value });
+});
+
+PushNotifications.requestPermissions().then(() => { PushNotifications.register() });
+
 const App: React.FC = () => (
   <IonApp>
-    <IonReactRouter>
+    <IonReactRouter history={browserHistory}>
       <IonRouterOutlet>
         <Route exact path="/home">
           <Home />
+        </Route>
+        <Route exact path="/profile">
+          <Profile />
         </Route>
         <Route exact path="/">
           <Redirect to="/home" />
